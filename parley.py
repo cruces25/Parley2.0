@@ -9,22 +9,22 @@ st.set_page_config(page_title="Tu Parley Coleo", layout="wide")
 st.title("🏆 Portal de Control - Sella Tu Parley")
 
 # 1. CARGA DE DATOS
-@st.cache_data
 def cargar_datos():
-    # Estas líneas deben tener exactamente 4 espacios de sangría
     try:
-        nomina = pd.read_excel("planilla_coleo.xlsx", sheet_name="PLANILLA_CONTROL")
-        cuadros = pd.read_excel("planilla_coleo.xlsx", sheet_name="CUADROS_PARLAY")
+        # header=2 significa que los títulos están en la FILA 3 del Excel (PLANILLA_CONTROL)
+        nomina = pd.read_excel("planilla_coleo.xlsx", sheet_name="PLANILLA_CONTROL", header=2)
+        
+        # header=1 significa que los títulos están en la FILA 2 del Excel (CUADROS_PARLAY)
+        cuadros = pd.read_excel("planilla_coleo.xlsx", sheet_name="CUADROS_PARLAY", header=1)
+        
+        # Limpiamos espacios vacíos en los nombres de las columnas por si acaso
+        nomina.columns = nomina.columns.str.strip()
+        cuadros.columns = cuadros.columns.str.strip()
+        
         return nomina, cuadros
     except FileNotFoundError:
-        st.error("❌ No encontré el archivo 'planilla_coleo.xlsx'. Verifica que esté subido a GitHub con ese nombre exacto.")
-        st.write("Archivos en el servidor:", os.listdir("."))
+        st.error("❌ No encontré el archivo 'planilla_coleo.xlsx'.")
         return None, None
-
-nomina, cuadros = cargar_datos()
-
-# Solo ejecutamos el resto si los datos cargaron bien
-if nomina is not None and cuadros is not None:
     
     # 2. SECCIÓN DE RANKING
     st.subheader("📊 Tabla de Posiciones (Leaderboard)")
