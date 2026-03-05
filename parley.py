@@ -15,7 +15,7 @@ def cargar_datos():
     import os
 st.write("Archivos encontrados en el servidor:", os.listdir("."))
 nomina = pd.read_excel("planilla_coleo.xlsx", sheet_name="PLANILLA_CONTROL")
-    cuadros = pd.read_excel("planilla_coleo.xlsx", sheet_name="CUADROS_PARLAY")
+cuadros = pd.read_excel("planilla_coleo.xlsx", sheet_name="CUADROS_PARLAY")
     return nomina, cuadros
 
 nomina, cuadros = cargar_datos()
