@@ -6,13 +6,15 @@ import pandas as pd
 st.set_page_config(page_title="Tu Parley Coleo", layout="wide")
 
 # Título y Logo
-st.title("🏆 Portal de Control - Copa Cheo Hernández Prisco")
+st.title("🏆 Portal de Control - Sella Tu Parley")
 
 # 1. CARGA DE DATOS
 @st.cache_data
 def cargar_datos():
     # Cargamos las hojas del Excel
-    nomina = pd.read_excel("planilla_coleo.xlsx", sheet_name="PLANILLA_CONTROL")
+    import os
+st.write("Archivos encontrados en el servidor:", os.listdir("."))
+nomina = pd.read_excel("planilla_coleo.xlsx", sheet_name="PLANILLA_CONTROL")
     cuadros = pd.read_excel("planilla_coleo.xlsx", sheet_name="CUADROS_PARLAY")
     return nomina, cuadros
 
